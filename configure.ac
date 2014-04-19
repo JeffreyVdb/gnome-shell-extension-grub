@@ -1,5 +1,5 @@
 AC_PREREQ(2.63)
-AC_INIT([gnome-shell-extension-mobile-vikings],[1.0],[https://github.com/JeffreyVdb/gnome-shell-extension-grub/issues])
+AC_INIT([gnome-shell-extension-grub],[1.0],[https://github.com/JeffreyVdb/gnome-shell-extension-grub/issues])
 
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
@@ -19,7 +19,6 @@ PKG_PROG_PKG_CONFIG([0.22])
 AC_CONFIG_FILES([
   Makefile
   po/Makefile.in
-  src/Makefile
 ])
 
 AC_OUTPUT

@@ -1,0 +1,10 @@
+{
+	"shell-version": 	["3.10.4"], 
+	"settings-schema": 	"org.gnome.shell.extensions.grub",
+	"uuid": 			"@uuid@", 
+	"name": 			"Grub boot menu extension", 
+	"description": 		"Reboot into desired menuentry from your gnome shell desktop",
+  	"gettext-domain": 	"@gettext_package@",
+  	"url": 				"@url@",
+  	"localedir":		"@localedir@"
+}
