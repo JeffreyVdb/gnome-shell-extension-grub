@@ -10,7 +10,7 @@ extensiondir = $(topextensiondir)/$(uuid)
 dist_extension_DATA = src/extension.js src/convenience.js data/stylesheet.css
 nodist_extension_DATA = data/metadata.json
 
-EXTRA_DIST = data/metadata.json.in
+EXTRA_DIST = config/config.rpath m4/ChangeLog  data/metadata.json.in
 
 data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 	$(AM_V_GEN) sed -e "s|[@]uuid@|$(uuid)|" \

@@ -1,0 +1,22 @@
+# English translations for gnome-shell-extension-grub package.
+# Copyright (C) 2014 THE gnome-shell-extension-grub'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gnome-shell-extension-grub package.
+# Jeffrey Vandenborne <vandenbornejeffrey@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-shell-extension-grub 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-20 02:31+0200\n"
+"PO-Revision-Date: 2014-04-20 02:32+0200\n"
+"Last-Translator: Jeffrey Vandenborne <vandenbornejeffrey@gmail.com>\n"
+"Language-Team: English\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ../src/extension.js:21 ../src/extension.js:23
+msgid "Grub Boot Menu"
+msgstr "Grub Boot Menu"
