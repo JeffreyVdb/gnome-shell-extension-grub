@@ -9,12 +9,14 @@ icondir = $(datadir)/icons/hicolor/scalable/actions
 uuid = gnome-shell-grub@vandenbornejeffrey@gmail.com
 extensiondir = $(topextensiondir)/$(uuid)
 
-dist_icon_DATA = data/icons/*.svg
+dist_icon_DATA = \
+				data/icons/windows8.svg \
+				data/icons/fedora.svg
 dist_extension_DATA = src/extension.js src/convenience.js src/grubLoader.js data/stylesheet.css
 dist_polkit_action_DATA = data/org.gnome-shell-extension-grub.grub2-set-default.policy
 nodist_extension_DATA = data/metadata.json
 
-EXTRA_DIST = config/config.rpath m4/ChangeLog  data/metadata.json.in
+EXTRA_DIST =  data/metadata.json.in
 
 data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 	$(AM_V_GEN) sed -e "s|[@]uuid@|$(uuid)|" \
