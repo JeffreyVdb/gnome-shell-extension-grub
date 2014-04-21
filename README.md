@@ -1,4 +1,5 @@
-gnome-shell-extension-grub
+Gnome Shell Grub Boot Menu
 ==========================
 
-Grub boot menu for Gnome Shell
+![sample boot menu grub](https://dl.dropboxusercontent.com/u/1755358/grub-boot.png)
+
