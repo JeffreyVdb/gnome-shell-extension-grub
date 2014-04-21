@@ -3,11 +3,15 @@ SUBDIRS = po
 
 ## extension data
 extensionurl = https://github.com/JeffreyVdb/gnome-shell-extension-grub
+polkit_actiondir = $(datadir)/polkit-1/actions
 topextensiondir = $(datadir)/gnome-shell/extensions
+icondir = $(datadir)/icons/hicolor/scalable/actions
 uuid = gnome-shell-grub@vandenbornejeffrey@gmail.com
 extensiondir = $(topextensiondir)/$(uuid)
 
-dist_extension_DATA = src/extension.js src/convenience.js data/stylesheet.css
+dist_icon_DATA = data/icons/*.svg
+dist_extension_DATA = src/extension.js src/convenience.js src/grubLoader.js data/stylesheet.css
+dist_polkit_action_DATA = data/org.gnome-shell-extension-grub.grub2-set-default.policy
 nodist_extension_DATA = data/metadata.json
 
 EXTRA_DIST = config/config.rpath m4/ChangeLog  data/metadata.json.in
@@ -19,6 +23,8 @@ data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 				-e "s|[@]url@|$(extensionurl)|" $< > $@
 
 CLEANFILES = data/metadata.json
+
+gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor; gtk-update-icon-cache -f -t 
 
 
 dist-hook: dist-changelog
@@ -32,3 +38,15 @@ dist-changelog:
 		-e 's/^[	 ]*$$//' >.ChangeLog.tmp; \
 	then mv -f .ChangeLog.tmp "$(top_distdir)/ChangeLog"; \
 	else rm -f .ChangeLog.tmp; exit 1; fi
+
+install-data-hook: update-icon-cache
+	## set grub boot file to read permissions for all users
+	chmod 644 /boot/grub2/grub.cfg 
+
+update-icon-cache:
+	@-if test -z "$(DESTDIR)"; then \
+		echo "Updating Gtk icon cache"; \
+		$(gtk_update_icon_cache); \
+	else \
+		echo "Cache not updated"; \
+	fi
