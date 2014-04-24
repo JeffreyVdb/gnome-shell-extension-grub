@@ -53,14 +53,18 @@ zip-file: all
 	rm -rf $(builddir)/_build
 
 local-install: zip-file
-	zip_file="$(abs_builddir)/dist/$(uuid).zip"; \
+	@echo 'installing zip file'
+	@-zip_file="$(abs_builddir)/dist/$(uuid).zip"; \
 	if [ -d "$(localextensiondir)/$(uuid)" ]; then \
-		rm -fR "$(localextensiondir)/$(uuid)"; \
+		rm -fr "$(localextensiondir)/$(uuid)"; \
 	fi; \
 	$(MKDIR_P) $(localextensiondir)/$(uuid); \
 	(cd $(localextensiondir)/$(uuid); \
 		unzip -q $${zip_file}; \
 	);
+	
+local-uninstall: 
+	-rm -rf "$(localextensiondir)/$(uuid)"
 
 dist-hook: dist-changelog
 .PHONY: dist-changelog
