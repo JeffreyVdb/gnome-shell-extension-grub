@@ -13,7 +13,9 @@ GRUB_CFG_PATH = $(shell find /boot/grub /boot/grub2 -iname 'grub.cfg' 2>/dev/nul
 
 dist_icon_DATA = \
 				data/icons/windows8.svg \
-				data/icons/fedora.svg
+				data/icons/fedora.svg \
+				data/icons/debian.svg
+				
 dist_extension_DATA = src/extension.js src/convenience.js src/grubLoader.js data/stylesheet.css
 dist_polkit_action_DATA = data/org.gnome-shell-extension-grub.grub2-set-default.policy
 nodist_extension_DATA = data/metadata.json src/config.js

@@ -52,7 +52,8 @@ const GrubLoader = new Lang.Class({
     _findIcon: function (entryName) {
         let regExpMap = {
             'fedora':   [/fedora/i],
-            'windows8': [/windows\s*8/i]
+            'windows8': [/windows\s*8/i],
+            'debian': [/debian/i]
         };
 
         let res;
