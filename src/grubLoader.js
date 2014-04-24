@@ -9,6 +9,10 @@ const MessageTray = imports.ui.messageTray;
 const Main = imports.ui.main;
 const GnomeSession = imports.misc.gnomeSession;
 
+const ExtensionUtils = imports.misc.extensionUtils;
+const Me = ExtensionUtils.getCurrentExtension();
+const Config = Me.imports.config;
+
 const GrubLoader = new Lang.Class({
     Name: 'GrubLoader',
 
@@ -16,7 +20,7 @@ const GrubLoader = new Lang.Class({
         this._entries = [];
     },
     getEntries: function () {
-        let cfgFile = Gio.file_new_for_path('/boot/grub2/grub.cfg');
+        let cfgFile = Gio.file_new_for_path(Config.GRUB_CFG_LOCATION);
         let size = cfgFile.query_info(
                 "standard::size",
                 Gio.FileQueryInfoFlags.NONE,

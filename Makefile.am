@@ -8,7 +8,8 @@ topextensiondir = $(datadir)/gnome-shell/extensions
 icondir = $(datadir)/icons/hicolor/scalable/actions
 uuid = gnome-shell-grub@vandenbornejeffrey@gmail.com
 extensiondir = $(topextensiondir)/$(uuid)
-GRUB_PATH = $(shell find /boot/grub /boot/grub2 -iname 'grub.cfg' 2>/dev/null|head -n1)
+localextensiondir = $(HOME)/.local/share/gnome-shell/extensions
+GRUB_CFG_PATH = $(shell find /boot/grub /boot/grub2 -iname 'grub.cfg' 2>/dev/null|head -n1)
 
 dist_icon_DATA = \
 				data/icons/windows8.svg \
@@ -27,13 +28,39 @@ data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 				-e "s|[@]url@|$(extensionurl)|" $< > $@
 
 src/config.js: src/config.js.in $(top_builddir)/config.status
-	$(AM_V_GEN) sed -e "s|[@]grub_location@|$(GRUB_PATH)|" $< > $@
+	$(AM_V_GEN) sed -e "s|[@]grub_location@|$(GRUB_CFG_PATH)|" $< > $@
 
 CLEANFILES = data/metadata.json \
-			 src/config.js
+			 src/config.js 
+
+clean-local:
+	-rm -rf $(builddir)/dist
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor; gtk-update-icon-cache -f -t 
 
+zip-file: all
+	@echo 'creating zip distribution file'
+	@-rm -rf $(builddir/_build) \
+	rm -rf $(builddir/dist) \
+	$(MKDIR_P) $(builddir)/_build; \
+	$(MKDIR_P) $(builddir)/dist; \
+	$(MAKE) install DESTDIR="$(abs_builddir)/_build"; \
+	cp -r "$(builddir)/_build$(datadir)/gnome-shell/extensions/$(uuid)" "$(builddir)/_build"; \
+	cp -r "$(builddir)/_build$(datadir)/locale" "$(builddir)/_build/$(uuid)"; \
+	(cd "$(builddir)/_build/$(uuid)/"; \
+		 zip -qr "$(abs_builddir)/dist/$(uuid).zip" .; \
+	); \
+	rm -rf $(builddir)/_build
+
+local-install: zip-file
+	zip_file="$(abs_builddir)/dist/$(uuid).zip"; \
+	if [ -d "$(localextensiondir)/$(uuid)" ]; then \
+		rm -fR "$(localextensiondir)/$(uuid)"; \
+	fi; \
+	$(MKDIR_P) $(localextensiondir)/$(uuid); \
+	(cd $(localextensiondir)/$(uuid); \
+		unzip -q $${zip_file}; \
+	);
 
 dist-hook: dist-changelog
 .PHONY: dist-changelog
@@ -49,7 +76,7 @@ dist-changelog:
 
 install-data-hook: update-icon-cache
 	## set grub boot file to read permissions for all users
-	chmod 644 /boot/grub2/grub.cfg 
+	chmod 644 $(GRUB_CFG_PATH)
 
 update-icon-cache:
 	@-if test -z "$(DESTDIR)"; then \

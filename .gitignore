@@ -12,6 +12,7 @@ po/POTFILES
 po/stamp-it
 data/weather-settings.desktop
 staging/
+/dist/
 
 *~
 *.gmo

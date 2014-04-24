@@ -1,1 +1,1 @@
-const GRUB_LOCATION = "@grub_location@";
+const GRUB_CFG_LOCATION = "@grub_location@";
