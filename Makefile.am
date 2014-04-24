@@ -8,15 +8,17 @@ topextensiondir = $(datadir)/gnome-shell/extensions
 icondir = $(datadir)/icons/hicolor/scalable/actions
 uuid = gnome-shell-grub@vandenbornejeffrey@gmail.com
 extensiondir = $(topextensiondir)/$(uuid)
+GRUB_PATH = $(shell find /boot/grub /boot/grub2 -iname 'grub.cfg' 2>/dev/null|head -n1)
 
 dist_icon_DATA = \
 				data/icons/windows8.svg \
 				data/icons/fedora.svg
 dist_extension_DATA = src/extension.js src/convenience.js src/grubLoader.js data/stylesheet.css
 dist_polkit_action_DATA = data/org.gnome-shell-extension-grub.grub2-set-default.policy
-nodist_extension_DATA = data/metadata.json
+nodist_extension_DATA = data/metadata.json src/config.js
 
-EXTRA_DIST =  data/metadata.json.in
+EXTRA_DIST =  	data/metadata.json.in \
+				src/config.js.in
 
 data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 	$(AM_V_GEN) sed -e "s|[@]uuid@|$(uuid)|" \
@@ -24,7 +26,11 @@ data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 				-e "s|[@]localedir@|$(datadir)/locale|" \
 				-e "s|[@]url@|$(extensionurl)|" $< > $@
 
-CLEANFILES = data/metadata.json
+src/config.js: src/config.js.in $(top_builddir)/config.status
+	$(AM_V_GEN) sed -e "s|[@]grub_location@|$(GRUB_PATH)|" $< > $@
+
+CLEANFILES = data/metadata.json \
+			 src/config.js
 
 gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor; gtk-update-icon-cache -f -t 
 

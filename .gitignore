@@ -19,3 +19,5 @@ metadata.json
 *.gschema.xml
 *.gschema.valid
 /gnome-shell-extension-grub*
+
+/src/config.js
