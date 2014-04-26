@@ -14,7 +14,7 @@
       <allow_inactive>no</allow_inactive>
       <allow_active>yes</allow_active>
     </defaults>
-    <annotate key="org.freedesktop.policykit.exec.path">/usr/sbin/grub2-set-default</annotate>
+    <annotate key="org.freedesktop.policykit.exec.path">@grub_set_default_cmd@</annotate>
     <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
   </action>
 

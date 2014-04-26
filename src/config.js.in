@@ -1,1 +1,2 @@
 const GRUB_CFG_LOCATION = "@grub_location@";
+const GRUB_SET_DEFAULT_CMD = "@grub_set_default_cmd@";

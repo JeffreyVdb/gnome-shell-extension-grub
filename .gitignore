@@ -22,3 +22,5 @@ metadata.json
 /gnome-shell-extension-grub*
 
 /src/config.js
+/autoscan.log
+/configure.scan

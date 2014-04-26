@@ -93,7 +93,8 @@ const GrubEntryInfo = new Lang.Class({
         // Set entry as the default grub entry
         let success, pid;
         try {
-            [success, pid] = GLib.spawn_async(null, ['pkexec', 'grub2-set-default', this.name], null,
+            let cmd = Config.GRUB_SET_DEFAULT_CMD;
+            [success, pid] = GLib.spawn_async(null, ['pkexec', cmd, this.name], null,
                                     GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
                                     null);
         } catch (err) {
