@@ -8,6 +8,11 @@ AM_INIT_AUTOMAKE([1.10 dist-xz no-dist-gzip foreign tar-ustar])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_PROG_SED
+AC_CHECK_PROGS([GRUB_SET_DEFAULT], [grub2-set-default grub-set-default], [no])
+
+if test "x$GRUB_SET_DEFAULT" = xno; then
+    AC_MSG_ERROR([no grub-set-default command found])
+fi
 
 GETTEXT_PACKAGE=gnome-shell-extension-grub
 AC_SUBST(GETTEXT_PACKAGE)

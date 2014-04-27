@@ -11,11 +11,6 @@ extensiondir = $(topextensiondir)/$(uuid)
 localextensiondir = $(HOME)/.local/share/gnome-shell/extensions
 GRUB_CFG_PATH = $(shell \
 				find /boot/grub /boot/grub2 -iname 'grub.cfg' 2>/dev/null|head -n1)
-GRUB_SET_DEFAULT = $(shell \
-				   for p in grub-set-default grub2-set-default; do \
-				   	 which $$p 2>/dev/null; \
-					 [ $$? -eq 0 ] && break; \
-				   done)
 
 dist_icon_DATA = \
 				data/icons/windows8.svg \

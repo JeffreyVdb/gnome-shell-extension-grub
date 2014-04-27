@@ -24,3 +24,4 @@ metadata.json
 /src/config.js
 /autoscan.log
 /configure.scan
+/data/org.gnome-shell-extension-grub.*.policy
