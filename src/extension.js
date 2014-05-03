@@ -103,10 +103,11 @@ const GrubMenu = new Lang.Class({
             }
         }
 
-        for each (let section in this._sections) {
+        for (let k in this._sections) {
+            let section = this._sections[k];
             section.actor.visible = section.numMenuItems > 0;
             this.menu.addMenuItem(section);
-        }
+        };
     },
     _loadMenuEntries: function () {
         return this.grubLoader.getEntries();
