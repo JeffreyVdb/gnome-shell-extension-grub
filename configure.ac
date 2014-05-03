@@ -1,5 +1,5 @@
 AC_PREREQ(2.63)
-AC_INIT([gnome-shell-extension-grub],[1.0],[https://github.com/JeffreyVdb/gnome-shell-extension-grub/issues])
+AC_INIT([gnome-shell-extension-grub],[1.1],[https://github.com/JeffreyVdb/gnome-shell-extension-grub/issues])
 
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([m4])
