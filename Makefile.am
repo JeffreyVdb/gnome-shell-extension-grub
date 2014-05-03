@@ -82,7 +82,7 @@ dist-hook: dist-changelog
 .PHONY: dist-changelog
 dist-changelog:
 	$(AM_V_at)if git --git-dir=$(top_srcdir)/.git --work-tree=$(top_srcdir) \
-		log --no-merges --pretty='tformat:%cd  %an  <%ae>%n%n%s%n%n%b'  --date=short | \
+		log --no-merges --pretty='tformat:%cd  %an  <%ae>%n%n%s%n%n%b'  --date=short v1.0.. | \
 	 $(SED)	-e '/^[12]...-[01].-[0123].  [^<>]*  <[^<>]*>$$/,/^$$/ b' \
 		-e '/[^	 ]/,/^[	 ]*$$/ !d' \
 		-e 's/^[	 ]*/	/' \

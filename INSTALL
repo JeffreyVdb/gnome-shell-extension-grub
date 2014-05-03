@@ -1,0 +1,7 @@
+Execute the following commands to create and install your package.
+
+./configure --prefix=/usr
+make
+sudo make install
+
+Restart Gnome-Shell by pressing Ctrl+F2 and typing r in the popup box
