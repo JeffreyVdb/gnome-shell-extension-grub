@@ -4,14 +4,14 @@
  "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
 <policyconfig>
   <vendor>Gnome Shell Extension Grub</vendor>
-  <vendor_url>http://satya164.github.com/fedy/</vendor_url>
+  <vendor_url>https://github.com/JeffreyVdb/gnome-shell-extension-grub</vendor_url>
 
   <action id="org.gnome-shell-extension-grub.grub2-set-default">
     <description>Set default boot entry</description>
     <message>Authentication is required to change restart settings.</message>
     <defaults>
       <allow_any>auth_admin</allow_any>
-      <allow_inactive>no</allow_inactive>
+      <allow_inactive>yes</allow_inactive>
       <allow_active>yes</allow_active>
     </defaults>
     <annotate key="org.freedesktop.policykit.exec.path">@grub_set_default_cmd@</annotate>
