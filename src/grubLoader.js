@@ -26,6 +26,7 @@ const GrubLoader = new Lang.Class({
                 Gio.FileQueryInfoFlags.NONE,
                 null).get_size();
 
+        // Might throw exception, catch in main
         let stream = cfgFile.read(null);
         let data = stream.read_bytes(size, null).get_data();
         stream.close(null);
@@ -94,7 +95,7 @@ const GrubEntryInfo = new Lang.Class({
         let success, pid;
         try {
             let cmd = Config.GRUB_SET_DEFAULT_CMD;
-            [success, pid] = GLib.spawn_async(null, ['pkexec', cmd, this.name], null,
+            [success, pid] = GLib.spawn_async(null, [Config.PKEXEC_CMD, cmd, this.name], null,
                                     GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
                                     null);
         } catch (err) {

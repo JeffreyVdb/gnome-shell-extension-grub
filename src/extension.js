@@ -2,6 +2,7 @@ const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const St = imports.gi.St;
+const Util = imports.misc.util;
 
 const PanelMenu = imports.ui.panelMenu;
 const Main = imports.ui.main;
@@ -12,12 +13,15 @@ const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
 const GrubLoader = Me.imports.grubLoader;
+const Config = Me.imports.config;
 
 const Gettext = imports.gettext.domain('gnome-shell-extension-grub');
 const _ = Gettext.gettext;
 const N_ = function(x) { return x; }
 
 const ICON_SIZE = 16;
+const SECTION_OPTIONS = 'additional-options';
+const GLib = imports.gi.GLib;
 
 const GrubMenuItem = Lang.Class({
     Name: 'GrubMenuItem',
@@ -64,17 +68,45 @@ const GrubMenu = new Lang.Class({
     destroy: function () {
         this.parent();
     },
+    _redisplayMenu: function () {
+        this.menu.removeAll();
+        this._create();
+    },
+    _redisplaySections: function (arr) {
+        // TODO: add implementation
+    },
     _create: function () {
-        let entries = this._loadMenuEntries();  
-        let id = 'menu-entries'
-        this._sections[id] = new PopupMenu.PopupMenuSection();
-
-        for (let i = 0; i < entries.length; ++i) {
-            this._sections[id].addMenuItem(new GrubMenuItem(entries[i]));
+        this._sections[SECTION_OPTIONS] = new PopupMenu.PopupMenuSection();
+        let entries;
+        try {
+            entries = this._loadMenuEntries();  
+        }
+        catch (e) {
+            // Problems reading file, create menu entry for fixing this
+            this._sections[SECTION_OPTIONS].addAction(_('Fix grub config file permissions.'), Lang.bind(this, function (event) {
+                let [success, pid] = GLib.spawn_async(null, [Config.PKEXEC_CMD, 'chmod', '644', Config.GRUB_CFG_LOCATION], null,
+                                            GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD,
+                                            null);
+               
+                GLib.child_watch_add(GLib.PRIORITY_DEFAULT, pid, Lang.bind(this, function () {
+                    this._redisplayMenu();
+                }), null);
+            }));
         }
 
-        this._sections[id].actor.visible = entries.length > 0;
-        this.menu.addMenuItem(this._sections[id]);
+        if (entries && entries.length) {
+            let id = 'menu-entries'
+            this._sections[id] = new PopupMenu.PopupMenuSection();
+
+            for (let i = 0; i < entries.length; ++i) {
+                this._sections[id].addMenuItem(new GrubMenuItem(entries[i]));
+            }
+        }
+
+        for each (let section in this._sections) {
+            section.actor.visible = section.numMenuItems > 0;
+            this.menu.addMenuItem(section);
+        }
     },
     _loadMenuEntries: function () {
         return this.grubLoader.getEntries();

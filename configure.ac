@@ -8,7 +8,12 @@ AM_INIT_AUTOMAKE([1.10 dist-xz no-dist-gzip foreign tar-ustar])
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_PROG_SED
+AC_CHECK_PROG([PKEXEC], [pkexec], [pkexec], [no]) 
 AC_CHECK_PROGS([GRUB_SET_DEFAULT], [grub2-set-default grub-set-default], [no])
+
+if test "x$PKEXEC" = xno; then
+    AC_MSG_ERROR([no pkexec command found])
+fi
 
 if test "x$GRUB_SET_DEFAULT" = xno; then
     AC_MSG_ERROR([no grub-set-default command found])

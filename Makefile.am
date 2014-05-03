@@ -38,6 +38,7 @@ data/metadata.json: data/metadata.json.in $(top_builddir)/config.status
 
 src/config.js: src/config.js.in $(top_builddir)/config.status
 	$(AM_V_GEN) sed -e "s|[@]grub_location@|$(GRUB_CFG_PATH)|" \
+	   				-e "s|[@]pkexec_cmd@|$(PKEXEC)|" \
 	   				-e "s|[@]grub_set_default_cmd@|$(GRUB_SET_DEFAULT)|" $< > $@
 
 CLEANFILES = data/metadata.json \

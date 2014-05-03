@@ -1,4 +1,5 @@
-# English translations for gnome-shell-extension-grub package.
+# Dutch translations for gnome-shell-extension-grub package
+# Nederlandse vertalingen voor het pakket gnome-shell-extension-grub.
 # Copyright (C) 2014 THE gnome-shell-extension-grub'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gnome-shell-extension-grub package.
 # Jeffrey Vandenborne <vandenbornejeffrey@gmail.com>, 2014.
@@ -8,10 +9,10 @@ msgstr ""
 "Project-Id-Version: gnome-shell-extension-grub 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-05-03 14:08+0200\n"
-"PO-Revision-Date: 2014-04-20 02:32+0200\n"
+"PO-Revision-Date: 2014-05-03 14:12+0200\n"
 "Last-Translator: Jeffrey Vandenborne <vandenbornejeffrey@gmail.com>\n"
-"Language-Team: English\n"
-"Language: en_US\n"
+"Language-Team: Dutch\n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,4 +24,4 @@ msgstr "Grub Boot Menu"
 
 #: ../src/extension.js:86
 msgid "Fix grub config file permissions."
-msgstr "Fix Grub config file permissions."
+msgstr "Repareer grub configuratie permissies."
